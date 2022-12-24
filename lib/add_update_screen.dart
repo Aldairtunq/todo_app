@@ -126,7 +126,7 @@ class _AddUpdateTaskState extends State<AddUpdateTask> {
                               titleController.clear();
                               descController.clear();
                               //to check if its working or not
-
+                              print("Data added");
                             }
                           },
                           child: Container(
