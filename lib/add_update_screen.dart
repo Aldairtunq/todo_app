@@ -69,10 +69,73 @@ class _AddUpdateTaskState extends State<AddUpdateTask> {
                           return null;
                         },
                       ),
-                    )
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: TextFormField(
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        minLines: 5,
+                        controller: descController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: "white notes here",
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Enter some text";
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ),
+              SizedBox(
+                height: 40,
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Material(
+                        color: Colors.green[400],
+                        borderRadius: BorderRadius.circular(10),
+                        child: InkWell(
+                          onTap: () {},
+                          child: Container(
+                            alignment: Alignment.center,
+                            margin: EdgeInsets.symmetric(horizontal: 20),
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            height: 55,
+                            width: 120,
+                            decoration: BoxDecoration(
+                                // boxShadow: [
+                                //  BoxShadow(
+                                //    color: Colors.black12,
+                                //    blurRadius: 5,
+                                //   spreadRadius: 1,
+                                //  ),
+                                // ],
+
+                                ),
+                            child: Text(
+                              "Submit",
+                              style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      )
+                    ]),
+              )
             ],
           ),
         ),
