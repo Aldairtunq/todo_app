@@ -48,4 +48,10 @@ class DBHelper {
     var dbClient = await db;
     return await dbClient!.delete('mytodo', where: 'id = ?', whereArgs: [id]);
   }
+
+  Future<int> update(TodoModel todoModel) async {
+    var dbClient = await db;
+    return await dbClient!.update('mytodo', todoModel.toMap(),
+        where: 'id = ?', whereArgs: [todoModel.id]);
+  }
 }
