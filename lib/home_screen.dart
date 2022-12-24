@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/db_handler.dart';
+import 'package:todo_app/model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -8,6 +10,20 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  DBHelper? dbHelper;
+  late Future<List<TodoModel>> dataList;
+
+  @override
+  void initState() {
+    super.initState();
+    dbHelper = DBHelper();
+    loadData();
+  }
+
+  loadData() async {
+    dataList = dbHelper!.getDataList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +49,17 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      //1422
+      body: Column(children: [
+        Expanded(
+            child: FutureBuilder(
+          future: dataList,
+          builder: (context, AsyncSnapshot<List<TodoModel>> snapshot) {
+            if (!snapshot.hasData || snapshot.data == null) {
+              return Center();
+            }
+          },
+        ))
+      ]),
     );
   }
 }
