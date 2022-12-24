@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:todo_app/db_handler.dart';
+import 'package:todo_app/home_screen.dart';
 import 'package:todo_app/model.dart';
 
 class AddUpdateTask extends StatefulWidget {
@@ -107,7 +109,26 @@ class _AddUpdateTaskState extends State<AddUpdateTask> {
                         color: Colors.green[400],
                         borderRadius: BorderRadius.circular(10),
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            if (_fromkey.currentState!.validate()) {
+                              dbHelper!.insert(TodoModel(
+                                  title: titleController.text,
+                                  desc: descController.text,
+                                  dateandtime: DateFormat('yMd')
+                                      .add_jm()
+                                      .format(DateTime.now())
+                                      .toString()));
+
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HomeScreen()));
+                              titleController.clear();
+                              descController.clear();
+                              //to check if its working or not
+
+                            }
+                          },
                           child: Container(
                             alignment: Alignment.center,
                             margin: EdgeInsets.symmetric(horizontal: 20),
@@ -126,6 +147,42 @@ class _AddUpdateTaskState extends State<AddUpdateTask> {
                                 ),
                             child: Text(
                               "Submit",
+                              style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Material(
+                        color: Colors.red[400],
+                        borderRadius: BorderRadius.circular(10),
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              titleController.clear();
+                              descController.clear();
+                            });
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            margin: EdgeInsets.symmetric(horizontal: 20),
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            height: 55,
+                            width: 120,
+                            decoration: BoxDecoration(
+                                // boxShadow: [
+                                //  BoxShadow(
+                                //    color: Colors.black12,
+                                //    blurRadius: 5,
+                                //   spreadRadius: 1,
+                                //  ),
+                                // ],
+
+                                ),
+                            child: Text(
+                              "Clear",
                               style: TextStyle(
                                   fontSize: 22,
                                   fontWeight: FontWeight.w500,
