@@ -67,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   ),
                 );
@@ -78,32 +78,37 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemBuilder: (context, index) {
                     int todoId = snapshot.data![index].id!.toInt();
                     String todoTitle = snapshot.data![index].title.toString();
-                    String todoDdesc = snapshot.data![index].title.toString();
-                    String todoDT = snapshot.data![index].title.toString();
+                    String todoDdesc = snapshot.data![index].desc.toString();
+                    String todoDT =
+                        snapshot.data![index].dateandtime.toString();
                     return Dismissible(
                       key: ValueKey<int>(todoId),
                       direction: DismissDirection.endToStart,
                       background: Container(
                         color: Colors.redAccent,
-                        child: Icon(Icons.delete_forever, color: Colors.white,),
+                        child: Icon(
+                          Icons.delete_forever,
+                          color: Colors.white,
+                        ),
                       ),
                       onDismissed: (DismissDirection direction) {
                         setState(() {
-                          
+                          dbHelper!.delete(todoId);
+                          dataList = dbHelper!.getDataList();
+                          snapshot.data!.remove(snapshot.data![index]);
                         });
                       },
-                       child: Container(
+                      child: Container(
                         margin: EdgeInsets.all(5),
                         decoration: BoxDecoration(
-                          color: Colors.yellow.shade300,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 4,
-                              spreadRadius: 1,
-                            )
-                          ]
-                        ),
+                            color: Colors.yellow.shade300,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black12,
+                                blurRadius: 4,
+                                spreadRadius: 1,
+                              )
+                            ]),
                         child: Column(
                           children: [
                             ListTile(
@@ -114,38 +119,53 @@ class _HomeScreenState extends State<HomeScreen> {
                                   todoTitle,
                                   style: TextStyle(fontSize: 19),
                                 ),
-                                ),
-                                subtitle: Text(
-                                  todoDdesc,
-                                  style: TextStyle(fontSize: 17),
-                                ) ,
+                              ),
+                              subtitle: Text(
+                                todoDdesc,
+                                style: TextStyle(fontSize: 17),
+                              ),
                             ),
                             Divider(
                               color: Colors.black,
                               thickness: 0.8,
                             ),
                             Padding(
-                              padding:EdgeInsets.symmetric(
-                                vertical: 3, horizontal: 10),
-                                child: Row(
-                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                               children: [
-                                Text(
-                                  todoDT,
-                                  style: TextStyle(
-                                    
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 3, horizontal: 10),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    todoDT,
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      fontStyle: FontStyle.italic,
+                                    ),
                                   ),
-                                )
-                               ],
-
-                                ),
-                                ),
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                AddUpdateTask(),
+                                          ));
+                                    },
+                                    child: Icon(
+                                      Icons.edit_note,
+                                      size: 28,
+                                      color: Colors.green,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
                           ],
                         ),
-                       ),
-                       
                       ),
-                                    
+                    );
                   },
                 );
               }
