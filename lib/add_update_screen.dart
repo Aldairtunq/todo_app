@@ -9,12 +9,12 @@ class AddUpdateTask extends StatefulWidget {
   String? todoTitle;
   String? todoDesc;
   String? todoDT;
-  String? update;
+  bool? update;
   AddUpdateTask({
     this.todoId,
     this.todoTitle,
     this.todoDesc,
-    this.todoDT,
+    this.update,
   });
 
   @override
@@ -126,13 +126,24 @@ class _AddUpdateTaskState extends State<AddUpdateTask> {
                         child: InkWell(
                           onTap: () {
                             if (_fromkey.currentState!.validate()) {
-                              dbHelper!.insert(TodoModel(
-                                  title: titleController.text,
-                                  desc: descController.text,
-                                  dateandtime: DateFormat('yMd')
-                                      .add_jm()
-                                      .format(DateTime.now())
-                                      .toString()));
+                              if (widget.update == true) {
+                                dbHelper!.update(TodoModel(
+                                    id: widget.todoId, // 38:08
+                                    title: titleController.text,
+                                    desc: descController.text,
+                                    dateandtime: DateFormat('yMd')
+                                        .add_jm()
+                                        .format(DateTime.now())
+                                        .toString()));
+                              } else {
+                                dbHelper!.insert(TodoModel(
+                                    title: titleController.text,
+                                    desc: descController.text,
+                                    dateandtime: DateFormat('yMd')
+                                        .add_jm()
+                                        .format(DateTime.now())
+                                        .toString()));
+                              }
 
                               Navigator.push(
                                   context,

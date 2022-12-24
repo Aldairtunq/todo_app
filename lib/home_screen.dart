@@ -149,8 +149,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) =>
-                                                AddUpdateTask(),
+                                            builder: (context) => AddUpdateTask(
+                                              todoId: todoId,
+                                              todoTitle: todoTitle,
+                                              todoDesc: todoDdesc,
+                                              update: true,
+                                            ),
                                           ));
                                     },
                                     child: Icon(
