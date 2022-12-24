@@ -17,7 +17,7 @@ class DBHelper {
 
   initDatabase() async {
     io.Directory documentDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentDirectory.path, ' Todo.db');
+    String path = join(documentDirectory.path, 'Todo.db');
     var db = await openDatabase(path, version: 1, onCreate: _createDatabase);
     return db;
   }
@@ -25,7 +25,7 @@ class DBHelper {
   _createDatabase(Database db, int version) async {
     // create data
     await db.execute(
-      "CREATE TABLE mytodo(id INTEGER PRYMARY KEY AUTOINCREMENT, title TEXT NOT NULL,desc TEXT NOT NULL,  dateandtime TEXT NOT NULL)",
+      "CREATE TABLE mytodo(id INTEGER PRiMARY KEY AUTOINCREMENT, title TEXT NOT NULL,desc TEXT NOT NULL,  dateandtime TEXT NOT NULL)",
     );
   }
 

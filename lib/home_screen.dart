@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: Drawer(),
       appBar: AppBar(
         title: Text(
-          "DP-TODO",
+          "DP-TODOo",
           style: TextStyle(
             fontSize: 22,
             fontWeight: FontWeight.w600,
@@ -76,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 //return ListView.builder(
                 // shrinkWrap: true,
                 // itemCount: snapshot,
-                // );
+                //   );
               }
             },
           ))
@@ -84,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
-        //19:43
+        child: Icon(Icons.add),
         onPressed: () {
           Navigator.push(context,
               MaterialPageRoute(builder: ((context) => AddUpdateTask())));
