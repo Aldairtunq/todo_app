@@ -30,16 +30,28 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       drawer: Drawer(),
       appBar: AppBar(
-        title: Text(
-          "DP-TODOo",
-          style: TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.w600,
-            letterSpacing: 1,
-          ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              "App",
+              style: TextStyle(
+                fontSize: 27,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+            Text(
+              "Notas",
+              style: TextStyle(
+                  fontSize: 27,
+                  fontWeight: FontWeight.w900,
+                  color: Colors.blue),
+            )
+          ],
         ),
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
         centerTitle: true,
-        elevation: 0,
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 10),
@@ -101,14 +113,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Container(
                         margin: EdgeInsets.all(5),
                         decoration: BoxDecoration(
-                            color: Colors.yellow.shade300,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black12,
-                                blurRadius: 4,
-                                spreadRadius: 1,
-                              )
-                            ]),
+                          color: Color.fromARGB(255, 184, 226, 249),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12,
+                              blurRadius: 4,
+                              spreadRadius: 1,
+                            )
+                          ],
+                        ),
                         child: Column(
                           children: [
                             ListTile(
@@ -140,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     todoDT,
                                     style: TextStyle(
                                       fontSize: 14,
-                                      fontWeight: FontWeight.w500,
+                                      fontWeight: FontWeight.w400,
                                       fontStyle: FontStyle.italic,
                                     ),
                                   ),
@@ -153,6 +166,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               todoId: todoId,
                                               todoTitle: todoTitle,
                                               todoDesc: todoDdesc,
+                                              todoDT: todoDT,
                                               update: true,
                                             ),
                                           ));
@@ -177,13 +191,18 @@ class _HomeScreenState extends State<HomeScreen> {
           )),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.green,
-        child: Icon(Icons.add),
-        onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: ((context) => AddUpdateTask())));
-        },
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          FloatingActionButton(
+            backgroundColor: Colors.black,
+            child: Icon(Icons.add),
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: ((context) => AddUpdateTask())));
+            },
+          ),
+        ],
       ),
     );
   }

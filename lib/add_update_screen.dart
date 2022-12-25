@@ -15,6 +15,7 @@ class AddUpdateTask extends StatefulWidget {
     this.todoTitle,
     this.todoDesc,
     this.update,
+    this.todoDT,
   });
 
   @override
@@ -46,7 +47,7 @@ class _AddUpdateTaskState extends State<AddUpdateTask> {
     if (widget.update == true) {
       appTitle = "Update Task";
     } else {
-      appTitle = "Add Task";
+      appTitle = "AGREGAR NOTA";
     }
     return Scaffold(
       appBar: AppBar(
@@ -77,7 +78,7 @@ class _AddUpdateTaskState extends State<AddUpdateTask> {
                         controller: titleController,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
-                          hintText: "Note Title",
+                          hintText: "Titulo de la Nota",
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -99,7 +100,7 @@ class _AddUpdateTaskState extends State<AddUpdateTask> {
                         controller: descController,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
-                          hintText: "white notes here",
+                          hintText: "Agrega el contenido",
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -121,20 +122,18 @@ class _AddUpdateTaskState extends State<AddUpdateTask> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Material(
-                        color: Colors.green[400],
+                        color: Color.fromARGB(255, 132, 241, 104),
                         borderRadius: BorderRadius.circular(10),
                         child: InkWell(
                           onTap: () {
                             if (_fromkey.currentState!.validate()) {
                               if (widget.update == true) {
                                 dbHelper!.update(TodoModel(
-                                    id: widget.todoId, // 38:08
-                                    title: titleController.text,
-                                    desc: descController.text,
-                                    dateandtime: DateFormat('yMd')
-                                        .add_jm()
-                                        .format(DateTime.now())
-                                        .toString()));
+                                  id: widget.todoId,
+                                  title: titleController.text,
+                                  desc: descController.text,
+                                  dateandtime: widget.todoDT,
+                                ));
                               } else {
                                 dbHelper!.insert(TodoModel(
                                     title: titleController.text,
@@ -172,17 +171,17 @@ class _AddUpdateTaskState extends State<AddUpdateTask> {
 
                                 ),
                             child: Text(
-                              "Submit",
+                              "GUARDAR",
                               style: TextStyle(
-                                  fontSize: 22,
+                                  fontSize: 21,
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.white),
+                                  color: Colors.black),
                             ),
                           ),
                         ),
                       ),
                       Material(
-                        color: Colors.red[400],
+                        color: Color.fromARGB(255, 149, 112, 227),
                         borderRadius: BorderRadius.circular(10),
                         child: InkWell(
                           onTap: () {
@@ -208,7 +207,7 @@ class _AddUpdateTaskState extends State<AddUpdateTask> {
 
                                 ),
                             child: Text(
-                              "Clear",
+                              "BORRAR",
                               style: TextStyle(
                                   fontSize: 22,
                                   fontWeight: FontWeight.w500,
