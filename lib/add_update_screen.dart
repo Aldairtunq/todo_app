@@ -45,7 +45,7 @@ class _AddUpdateTaskState extends State<AddUpdateTask> {
     final descController = TextEditingController(text: widget.todoDesc);
     String appTitle;
     if (widget.update == true) {
-      appTitle = "Update Task";
+      appTitle = "ACTUALIZAR LA NOTA";
     } else {
       appTitle = "AGREGAR NOTA";
     }

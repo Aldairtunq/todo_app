@@ -36,14 +36,14 @@ class _HomeScreenState extends State<HomeScreen> {
             Text(
               "App",
               style: TextStyle(
-                fontSize: 27,
+                fontSize: 40,
                 fontWeight: FontWeight.w900,
               ),
             ),
             Text(
               "Notas",
               style: TextStyle(
-                  fontSize: 27,
+                  fontSize: 38,
                   fontWeight: FontWeight.w900,
                   color: Colors.blue),
             )
@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
               } else if (snapshot.data!.length == 0) {
                 return Center(
                   child: Text(
-                    " No Tasks Found",
+                    " NINGUNA NOTA",
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
@@ -111,9 +111,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         });
                       },
                       child: Container(
-                        margin: EdgeInsets.all(5),
+                        margin: EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 184, 226, 249),
+                          borderRadius: BorderRadius.circular(20),
+                          color: Color.fromARGB(255, 180, 228, 244),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black12,
@@ -173,8 +174,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     },
                                     child: Icon(
                                       Icons.edit_note,
-                                      size: 28,
-                                      color: Colors.green,
+                                      size: 50,
+                                      color: Color.fromARGB(255, 11, 11, 11),
                                     ),
                                   )
                                 ],
